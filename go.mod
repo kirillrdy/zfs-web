@@ -6,7 +6,7 @@ require (
 	github.com/google/uuid v1.0.0 // indirect
 	github.com/huandu/xstrings v1.2.0 // indirect
 	github.com/kirillrdy/vidos v0.0.0-20180917020446-e8cd185e2aca
-	github.com/kirillrdy/web v0.0.0-20170502231629-1dc2c13cfa99
+	github.com/kirillrdy/web v0.0.0-20180917023045-3d0088c99eae
 	github.com/mistifyio/go-zfs v2.1.2-0.20180321011823-d5b163290a48+incompatible
 	github.com/pborman/uuid v0.0.0-20180909234540-25cd46ecac86 // indirect
 	github.com/syncthing/syncthing v0.14.50 // indirect

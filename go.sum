@@ -74,6 +74,8 @@ github.com/kirillrdy/vidos v0.0.0-20180917020446-e8cd185e2aca h1:r+AKV6DHOl+0UH5
 github.com/kirillrdy/vidos v0.0.0-20180917020446-e8cd185e2aca/go.mod h1:H66PCiU64BGmvt4HzyZ4FS16cuUYQA6s1hOFKR4ACew=
 github.com/kirillrdy/web v0.0.0-20170502231629-1dc2c13cfa99 h1:KWHoU3aL75kf8w057+tw3Mzir1wI/4gnLt5P2plHGxs=
 github.com/kirillrdy/web v0.0.0-20170502231629-1dc2c13cfa99/go.mod h1:qS/c7oVi7Z8FAjYuo24p/dyFL13Db3MYJbr04U3uC3k=
+github.com/kirillrdy/web v0.0.0-20180917023045-3d0088c99eae h1:2/yVPyTSzxDdYiwB+opWTzX09LzAyLCcrGwmK/c9UzM=
+github.com/kirillrdy/web v0.0.0-20180917023045-3d0088c99eae/go.mod h1:xig9kmSQRJGPFqGCQl5N8pUDrKcD1XMiNhR4yX/aePg=
 github.com/mattn/go-isatty v0.0.3/go.mod h1:M+lRXTBqGeGNdLjl/ufCoiOlB5xdOkqRJdNxMWT7Zi4=
 github.com/mattn/go-isatty v0.0.4/go.mod h1:M+lRXTBqGeGNdLjl/ufCoiOlB5xdOkqRJdNxMWT7Zi4=
 github.com/mattn/go-sqlite3 v1.7.0/go.mod h1:FPy6KqzDD04eiIsT53CuJW3U88zkxoIYsOqkbpncsNc=
