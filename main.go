@@ -17,7 +17,7 @@ func main() {
 	datasets, err := zfs.Filesystems("")
 	crash(err)
 	for _, dataset := range datasets {
-		fmt.Printf("%#v %v %v\n", dataset.Name, humanize.Bytes(dataset.Used), humanize.Bytes(dataset.Avail))
+		fmt.Printf("%#v%v\t%v\t%v\n", dataset.Name, humanize.Bytes(dataset.Used), humanize.Bytes(dataset.Avail), humanize.Bytes(dataset.Referenced))
 	}
 
 }
