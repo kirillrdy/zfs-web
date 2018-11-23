@@ -11,6 +11,8 @@ import (
 	"github.com/mistifyio/go-zfs"
 	"log"
 	"net/http"
+	"strconv"
+	"time"
 )
 
 func crash(err error) {
@@ -30,14 +32,50 @@ func list(response http.ResponseWriter, request *http.Request) {
 
 }
 
-func main() {
+func printDatasets() {
 	datasets, err := zfs.Filesystems("")
 	crash(err)
 	for _, dataset := range datasets {
-		fmt.Printf("%#v%v\t%v\t%v\n", dataset.Name, humanize.Bytes(dataset.Used), humanize.Bytes(dataset.Avail), humanize.Bytes(dataset.Referenced))
+		fmt.Printf("%#v\t%v\t%v\t%v\n", dataset.Name, humanize.Bytes(dataset.Used), humanize.Bytes(dataset.Avail), humanize.Bytes(dataset.Referenced))
 	}
+}
 
+func webInterface() {
 	router.AddHandler(css.ResetCSSPath, css.ServeResetCSS)
 	router.AddHandler(datasetsPath, list)
-	http.ListenAndServe(":3000", nil)
+	addr := ":3000"
+	log.Printf("Listening on %v\n", addr)
+	http.ListenAndServe(addr, nil)
+}
+
+func cleanUp(dataset *zfs.Dataset) {
+	snapshots, err := dataset.Snapshots()
+	crash(err)
+	if len(snapshots) > 1000 {
+		log.Print("CLEAN")
+		for _, snapshot := range snapshots[0:10] {
+			err := snapshot.Destroy(0)
+			crash(err)
+		}
+	}
+}
+
+func createSnapshot(dataset *zfs.Dataset) {
+	now := time.Now().Unix()
+	name := strconv.Itoa(int(now))
+	_, err := dataset.Snapshot(name, false)
+	crash(err)
+}
+
+func main() {
+	dataset, err := zfs.GetDataset("zroot/usr/home")
+	crash(err)
+
+	for {
+		createSnapshot(dataset)
+		start := time.Now()
+		cleanUp(dataset)
+		log.Printf("clean up %s", time.Since(start).String())
+		time.Sleep(1 * time.Second)
+	}
 }
