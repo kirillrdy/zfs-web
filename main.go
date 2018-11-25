@@ -11,7 +11,6 @@ import (
 	"github.com/mistifyio/go-zfs"
 	"log"
 	"net/http"
-	"strconv"
 	"time"
 )
 
@@ -51,7 +50,8 @@ func webInterface() {
 func cleanUp(dataset *zfs.Dataset) {
 	snapshots, err := dataset.Snapshots()
 	crash(err)
-	if len(snapshots) > 1000 {
+
+	if len(snapshots) > 1440 {
 		log.Print("CLEAN")
 		for _, snapshot := range snapshots[0:10] {
 			err := snapshot.Destroy(0)
@@ -61,18 +61,24 @@ func cleanUp(dataset *zfs.Dataset) {
 }
 
 func createSnapshot(dataset *zfs.Dataset) {
-	now := time.Now().Unix()
-	name := strconv.Itoa(int(now))
-	_, err := dataset.Snapshot(name, false)
-	crash(err)
+	for {
+		now := time.Now()
+
+		name := now.Format("2006-01-02-15:04:05")
+		_, err := dataset.Snapshot(name, false)
+		crash(err)
+
+		time.Sleep(1 * time.Minute)
+	}
+
 }
 
 func main() {
 	dataset, err := zfs.GetDataset("zroot/usr/home")
 	crash(err)
 
+	go createSnapshot(dataset)
 	for {
-		createSnapshot(dataset)
 		start := time.Now()
 		cleanUp(dataset)
 		log.Printf("clean up %s", time.Since(start).String())
