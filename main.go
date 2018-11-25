@@ -54,8 +54,10 @@ func cleanUp(dataset *zfs.Dataset) {
 	if len(snapshots) > 1440 {
 		log.Print("CLEAN")
 		for _, snapshot := range snapshots[0:10] {
+			start := time.Now()
 			err := snapshot.Destroy(0)
 			crash(err)
+			log.Printf("destroy %s", time.Since(start).String())
 		}
 	}
 }
