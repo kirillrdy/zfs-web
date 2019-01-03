@@ -1,4 +1,4 @@
 Requires zfs allow:
 
 
-zfs allow kirillvr create,destroy,mount zroot/usr/home
+zfs allow kirillvr create,destroy,mount,snapshot zroot/usr/home
