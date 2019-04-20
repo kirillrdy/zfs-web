@@ -9,12 +9,47 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import PeopleIcon from '@material-ui/icons/People';
 import BarChartIcon from '@material-ui/icons/BarChart';
 import LayersIcon from '@material-ui/icons/Layers';
+import Grid from '@material-ui/core/Grid';
 
-class App extends Component {
+interface Dataset {
+  Name: string
+}
+
+interface Props {
+}
+
+interface State {
+  datasets: Array<Dataset>
+}
+
+class App extends Component<Props, State> {
+
+  componentWillMount() {
+    this.setState({datasets: []})
+  }
+
+  async componentDidMount() {
+    const response = await fetch("http://localhost:3000/datasets.json")
+    let datasets = await response.json()
+    this.setState({datasets: datasets})
+  }
+
+
+
   render() {
     return (
       <div className="App">
-         <div>
+        <Grid container direction="column">
+          <Grid item>
+            foo
+          </Grid>
+
+          <Grid>
+            bar
+          </Grid>
+        </Grid>
+        <div>
+          {this.state.datasets.map(dataset => <ListItem button><ListItemText primary={dataset.Name}/></ListItem>)}
             <ListItem button>
               <ListItemIcon>
                 <DashboardIcon />
