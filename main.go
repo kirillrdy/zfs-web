@@ -63,13 +63,15 @@ func cleanUp(dataset *zfs.Dataset) {
 	crash(err)
 
 	if len(snapshots) > 1440 {
-		log.Print("CLEAN")
+		log.Print("starting")
+		start := time.Now()
 		for _, snapshot := range snapshots[0:10] {
 			start := time.Now()
 			err := snapshot.Destroy(0)
 			crash(err)
 			log.Printf("destroy %s", time.Since(start).String())
 		}
+		log.Printf("clean up %s", time.Since(start).String())
 	}
 }
 
@@ -90,11 +92,11 @@ func main() {
 	dataset, err := zfs.GetDataset("zroot/usr/home")
 	crash(err)
 
+	go webInterface()
 	go createSnapshot(dataset)
 	for {
-		start := time.Now()
+
 		cleanUp(dataset)
-		log.Printf("clean up %s", time.Since(start).String())
 		time.Sleep(1 * time.Second)
 	}
 }
