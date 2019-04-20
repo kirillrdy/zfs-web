@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"github.com/dustin/go-humanize"
 	"github.com/kirillrdy/vidos/router"
@@ -23,12 +24,21 @@ func crash(err error) {
 var application vidos_web.Application = vidos_web.Application{Name: "ZFS", Menu: []vidos_web.Page{{Path: datasetsPath, Title: "Datasets"}}}
 
 const datasetsPath web.Path = "/datasets"
+const datasetsJSONPath web.Path = "/datasets.json"
 
 func list(response http.ResponseWriter, request *http.Request) {
-
 	hello := html.H1().Text("Hello World !")
 	application.NewPage("Datasets", "/datasets").ToHTML(hello).WriteTo(response)
+}
 
+func listJSON(response http.ResponseWriter, request *http.Request) {
+	//TODO obviously not *
+	response.Header().Add("Access-Control-Allow-Origin", "*")
+	response.Header().Add("Content-Type", "application/json")
+	datasets, err := zfs.Filesystems("")
+	crash(err)
+	encoder := json.NewEncoder(response)
+	encoder.Encode(&datasets)
 }
 
 func printDatasets() {
@@ -42,6 +52,7 @@ func printDatasets() {
 func webInterface() {
 	router.AddHandler(css.ResetCSSPath, css.ServeResetCSS)
 	router.AddHandler(datasetsPath, list)
+	router.AddHandler(datasetsJSONPath, listJSON)
 	addr := ":3000"
 	log.Printf("Listening on %v\n", addr)
 	http.ListenAndServe(addr, nil)
