@@ -31,11 +31,15 @@ class App extends Component<Props, State> {
   }
 
   async componentDidMount() {
+      //TODO hardcoded stuff
     const response = await fetch("http://localhost:3000/datasets.json")
     let datasets = await response.json()
     this.setState({datasets: datasets})
   }
 
+    showSnapshots(dataset: Dataset) {
+        debugger
+    }
 
   render() {
     return (
@@ -74,7 +78,11 @@ class App extends Component<Props, State> {
               </ListItem>
           </Grid>
           <Grid item xs={6}>
-              {this.state.datasets.map(dataset => <ListItem button><ListItemText primary={dataset.Name}/></ListItem>)}
+              {this.state.datasets.map(dataset =>
+                  <ListItem button onClick={e => this.showSnapshots(dataset)}>
+                      <ListItemText primary={dataset.Name}/>
+                  </ListItem>
+              )}
           </Grid>
         </Grid>
         <div>
