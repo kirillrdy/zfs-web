@@ -10,6 +10,7 @@ import PeopleIcon from '@material-ui/icons/People';
 import BarChartIcon from '@material-ui/icons/BarChart';
 import LayersIcon from '@material-ui/icons/Layers';
 import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
 
 interface Dataset {
   Name: string
@@ -25,6 +26,7 @@ interface State {
 class App extends Component<Props, State> {
 
   componentWillMount() {
+      //TODO figure out how not to do this
     this.setState({datasets: []})
   }
 
@@ -35,51 +37,47 @@ class App extends Component<Props, State> {
   }
 
 
-
   render() {
     return (
       <div className="App">
-        <Grid container direction="column">
+        <Grid container spacing={24}>
           <Grid item>
-            foo
+              <ListItem button>
+                  <ListItemIcon>
+                      <DashboardIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Dashboard" />
+              </ListItem>
+              <ListItem button>
+                  <ListItemIcon>
+                      <ShoppingCartIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Orders" />
+              </ListItem>
+              <ListItem button>
+                  <ListItemIcon>
+                      <PeopleIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Customers" />
+              </ListItem>
+              <ListItem button>
+                  <ListItemIcon>
+                      <BarChartIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Reports" />
+              </ListItem>
+              <ListItem button>
+                  <ListItemIcon>
+                      <LayersIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Integrations" />
+              </ListItem>
           </Grid>
-
-          <Grid>
-            bar
+          <Grid item xs={6}>
+              {this.state.datasets.map(dataset => <ListItem button><ListItemText primary={dataset.Name}/></ListItem>)}
           </Grid>
         </Grid>
         <div>
-          {this.state.datasets.map(dataset => <ListItem button><ListItemText primary={dataset.Name}/></ListItem>)}
-            <ListItem button>
-              <ListItemIcon>
-                <DashboardIcon />
-              </ListItemIcon>
-              <ListItemText primary="Dashboard" />
-            </ListItem>
-            <ListItem button>
-              <ListItemIcon>
-                <ShoppingCartIcon />
-              </ListItemIcon>
-              <ListItemText primary="Orders" />
-            </ListItem>
-            <ListItem button>
-              <ListItemIcon>
-                <PeopleIcon />
-              </ListItemIcon>
-              <ListItemText primary="Customers" />
-            </ListItem>
-            <ListItem button>
-              <ListItemIcon>
-                <BarChartIcon />
-              </ListItemIcon>
-              <ListItemText primary="Reports" />
-            </ListItem>
-            <ListItem button>
-              <ListItemIcon>
-                <LayersIcon />
-              </ListItemIcon>
-              <ListItemText primary="Integrations" />
-            </ListItem>
         </div>
       </div>
     );
