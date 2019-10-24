@@ -89,14 +89,17 @@ func createSnapshot(dataset *zfs.Dataset) {
 }
 
 func main() {
-	dataset, err := zfs.GetDataset("zroot/usr/home")
-	crash(err)
 
-	go webInterface()
-	go createSnapshot(dataset)
-	for {
+	webInterface()
 
-		cleanUp(dataset)
-		time.Sleep(1 * time.Second)
-	}
+	//	dataset, err := zfs.GetDataset("zroot/usr/home")
+	//	crash(err)
+
+	//TODO lets park this for now and focus on web interface
+	//	go createSnapshot(dataset)
+	//	for {
+	//
+	//		cleanUp(dataset)
+	//		time.Sleep(1 * time.Second)
+	//	}
 }
