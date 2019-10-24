@@ -18,3 +18,5 @@ require (
 	golang.org/x/sys v0.0.0-20181122145206-62eef0e2fa9b // indirect
 	golang.org/x/time v0.0.0-20181108054448-85acf8d2951c // indirect
 )
+
+go 1.13
