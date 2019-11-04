@@ -23,13 +23,17 @@ function clicked(dataset: Dataset) {
 //TODO prettier
 function App() {
 
+  const [isLoading, setIsLoading] = useState(true)
+
   const [datasets, setDatasets] = useState(new Array<Dataset>());
 
   useEffect( () => {
+    if (isLoading == false) return;
     (async() => {
       const response = await fetch("http://localhost:3000/datasets.json")
       let datasets = await response.json()
       setDatasets(datasets)
+      setIsLoading(false)
     })()
   })
 
