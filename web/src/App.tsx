@@ -30,8 +30,11 @@ function App() {
     (async() => {
       const response = await fetch("http://localhost:3000/datasets.json")
       let datasets = await response.json()
-      setDatasets(datasets)
+
       setIsLoading(false)
+      setDatasets(datasets)
+
+
     })()
   })
 
