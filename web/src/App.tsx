@@ -41,7 +41,6 @@ function App() {
       <div>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
         <Grid container spacing={10}>
-
           <Grid item>
               <ListItem button>
                   <ListItemIcon>
@@ -74,7 +73,7 @@ function App() {
                   <ListItemText primary="Integrations" />
               </ListItem>
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs>
           <h1>Datasets</h1>
               {datasets.map((dataset: Dataset) =>
                   <ListItem key={dataset.Name} button onClick={e => clicked(dataset)}>
