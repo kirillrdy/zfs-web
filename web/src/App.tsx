@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import './App.css';
 import Button from '@material-ui/core/Button';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -39,14 +38,15 @@ function App() {
 
 
     return (
-      <div className="App">
-        <Grid container spacing={24}>
+      <div>
+        <Grid container spacing={10}>
+
           <Grid item>
               <ListItem button>
                   <ListItemIcon>
                       <DashboardIcon />
                   </ListItemIcon>
-                  <ListItemText primary="Dashboard" />
+                  <ListItemText primary="Datasets" />
               </ListItem>
               <ListItem button>
                   <ListItemIcon>
@@ -74,16 +74,16 @@ function App() {
               </ListItem>
           </Grid>
           <Grid item xs={6}>
-              {datasets.map(dataset =>
+          <h1>Datasets</h1>
+              {datasets.map((dataset: Dataset) =>
                   <ListItem key={dataset.Name} button onClick={e => clicked(dataset)}>
                       <ListItemText primary={dataset.Name}/>
+                      <Button> Foo</Button>
                   </ListItem>
               )}
           </Grid>
         </Grid>
-        <div>
-        </div>
-      </div>
+    </div>
     );
 }
 
