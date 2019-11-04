@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import Button from '@material-ui/core/Button';
 import ListItem from '@material-ui/core/ListItem';
@@ -16,32 +16,24 @@ interface Dataset {
   Name: string
 }
 
-interface Props {
+function clicked(dataset: Dataset) {
 }
 
-interface State {
-  datasets: Array<Dataset>
-}
 
-class App extends Component<Props, State> {
+//TODO prettier
+function App() {
 
-  componentWillMount() {
-      //TODO figure out how not to do this
-    this.setState({datasets: []})
-  }
+  const [datasets, setDatasets] = useState(new Array<Dataset>());
 
-  async componentDidMount() {
-      //TODO hardcoded stuff
-    const response = await fetch("http://localhost:3000/datasets.json")
-    let datasets = await response.json()
-    this.setState({datasets: datasets})
-  }
+  useEffect( () => {
+    (async() => {
+      const response = await fetch("http://localhost:3000/datasets.json")
+      let datasets = await response.json()
+      setDatasets(datasets)
+    })()
+  })
 
-    showSnapshots(dataset: Dataset) {
-        debugger
-    }
 
-  render() {
     return (
       <div className="App">
         <Grid container spacing={24}>
@@ -78,8 +70,8 @@ class App extends Component<Props, State> {
               </ListItem>
           </Grid>
           <Grid item xs={6}>
-              {this.state.datasets.map(dataset =>
-                  <ListItem button onClick={e => this.showSnapshots(dataset)}>
+              {datasets.map(dataset =>
+                  <ListItem key={dataset.Name} button onClick={e => clicked(dataset)}>
                       <ListItemText primary={dataset.Name}/>
                   </ListItem>
               )}
@@ -89,7 +81,6 @@ class App extends Component<Props, State> {
         </div>
       </div>
     );
-  }
 }
 
 export default App;
