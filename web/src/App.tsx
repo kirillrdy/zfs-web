@@ -17,18 +17,24 @@ interface Dataset {
 function clicked(dataset: Dataset) {
 }
 
+function servedHost() {
+  return window.location.protocol + "//" + window.location.hostname
+}
 
+
+
+// TODO error handling
+// TODO spinner
 //TODO prettier
 function App() {
 
   const [isLoading, setIsLoading] = useState(true)
-
   const [datasets, setDatasets] = useState(new Array<Dataset>());
 
   useEffect( () => {
     if (isLoading === false) return;
     (async() => {
-      const response = await fetch("http://localhost:3000/datasets.json")
+      const response = await fetch(servedHost() + ":3000/datasets.json")
       let datasets = await response.json()
 
       setIsLoading(false)
