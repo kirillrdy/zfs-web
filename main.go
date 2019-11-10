@@ -12,6 +12,8 @@ import (
 	"github.com/mistifyio/go-zfs"
 	"log"
 	"net/http"
+	"os"
+	"os/exec"
 	"time"
 )
 
@@ -89,6 +91,12 @@ func createSnapshot(dataset *zfs.Dataset) {
 }
 
 func main() {
+
+	npm := exec.Command("npm", "start")
+	npm.Stdout = os.Stdout
+	npm.Stderr = os.Stderr
+
+	npm.Start()
 
 	webInterface()
 
