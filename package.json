@@ -9,8 +9,10 @@
     "@types/node": "*",
     "@types/react": "*",
     "@types/react-dom": "*",
+    "@types/react-router-dom": "^5.1.2",
     "react": "*",
     "react-dom": "*",
+    "react-router-dom": "^5.1.2",
     "react-scripts": "*",
     "typescript": "*"
   },

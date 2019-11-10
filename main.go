@@ -51,15 +51,6 @@ func printDatasets() {
 	}
 }
 
-func webInterface() {
-	router.AddHandler(css.ResetCSSPath, css.ServeResetCSS)
-	router.AddHandler(datasetsPath, list)
-	router.AddHandler(datasetsJSONPath, listJSON)
-	addr := ":3000"
-	log.Printf("Listening on %v\n", addr)
-	http.ListenAndServe(addr, nil)
-}
-
 func cleanUp(dataset *zfs.Dataset) {
 	snapshots, err := dataset.Snapshots()
 	crash(err)
@@ -92,13 +83,19 @@ func createSnapshot(dataset *zfs.Dataset) {
 
 func main() {
 
+	router.AddHandler(css.ResetCSSPath, css.ServeResetCSS)
+	router.AddHandler(datasetsPath, list)
+	router.AddHandler(datasetsJSONPath, listJSON)
+	addr := ":3000"
+
 	npm := exec.Command("npm", "start")
 	npm.Stdout = os.Stdout
 	npm.Stderr = os.Stderr
 
 	npm.Start()
 
-	webInterface()
+	log.Printf("Listening on %v\n", addr)
+	http.ListenAndServe(addr, nil)
 
 	//	dataset, err := zfs.GetDataset("zroot/usr/home")
 	//	crash(err)

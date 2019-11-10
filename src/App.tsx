@@ -10,6 +10,13 @@ import BarChartIcon from '@material-ui/icons/BarChart';
 import LayersIcon from '@material-ui/icons/Layers';
 import Grid from '@material-ui/core/Grid';
 
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+
 interface Dataset {
   Name: string
 }
@@ -22,11 +29,7 @@ function servedHost() {
 }
 
 
-
-// TODO error handling
-// TODO spinner
-//TODO prettier
-function App() {
+function Datasets() {
 
   const [isLoading, setIsLoading] = useState(true)
   const [datasets, setDatasets] = useState(new Array<Dataset>());
@@ -43,11 +46,27 @@ function App() {
 
     })()
   })
+return (
+          <Grid item xs>
+            <h1>Datasets</h1>
+              {datasets.map((dataset: Dataset) =>
+                  <ListItem key={dataset.Name} button onClick={e => clicked(dataset)}>
+                      <ListItemText primary={dataset.Name}/>
+                      <Button> Foo</Button>
+                  </ListItem>
+              )}
+          </Grid>);
+
+}
 
 
+// TODO error handling
+// TODO spinner
+//TODO prettier
+function App() {
     return (
-      <div>
-        <Grid container spacing={10}>
+      <Grid container spacing={10}>
+        <Router>
           <Grid item>
               <ListItem button>
                   <ListItemIcon>
@@ -81,16 +100,17 @@ function App() {
               </ListItem>
           </Grid>
           <Grid item xs>
-          <h1>Datasets</h1>
-              {datasets.map((dataset: Dataset) =>
-                  <ListItem key={dataset.Name} button onClick={e => clicked(dataset)}>
-                      <ListItemText primary={dataset.Name}/>
-                      <Button> Foo</Button>
-                  </ListItem>
-              )}
+            <Switch>
+              <Route path="/datasets">
+                <Datasets />
+             </Route>
+              <Route path="/">
+               <Datasets />
+              </Route>
+            </Switch>
           </Grid>
-        </Grid>
-    </div>
+        </Router>
+      </Grid>
     );
 }
 
