@@ -9,6 +9,7 @@ import PeopleIcon from '@material-ui/icons/People';
 import BarChartIcon from '@material-ui/icons/BarChart';
 import LayersIcon from '@material-ui/icons/Layers';
 import Grid from '@material-ui/core/Grid';
+import { makeStyles } from '@material-ui/core/styles';
 
 import {
   BrowserRouter as Router,
@@ -16,6 +17,16 @@ import {
   Route,
   Link
 } from "react-router-dom";
+
+const useStyles = makeStyles({
+  fixedHeight: {
+    height: '100%',
+  },
+  list: {
+    'overflow-y': 'auto',
+    height: '100%',
+  },
+});
 
 interface Dataset {
   Name: string
@@ -46,8 +57,9 @@ function Datasets() {
 
     })()
   })
+  const classes = useStyles()
 return (
-          <Grid item xs>
+          <div className={classes.list}>
             <h1>Datasets</h1>
               {datasets.map((dataset: Dataset) =>
                   <ListItem key={dataset.Name} button onClick={e => clicked(dataset)}>
@@ -55,7 +67,7 @@ return (
                       <Button> Foo</Button>
                   </ListItem>
               )}
-          </Grid>);
+          </div>);
 
 }
 
@@ -64,16 +76,19 @@ return (
 // TODO spinner
 //TODO prettier
 function App() {
+    const classes = useStyles()
     return (
-      <Grid container spacing={10}>
+      <Grid container spacing={10} className={classes.fixedHeight}>
         <Router>
           <Grid item>
+            <Link to="/datasets">
               <ListItem button>
                   <ListItemIcon>
                       <DashboardIcon />
                   </ListItemIcon>
                   <ListItemText primary="Datasets" />
               </ListItem>
+            </Link>
               <ListItem button>
                   <ListItemIcon>
                       <ShoppingCartIcon />
@@ -99,7 +114,7 @@ function App() {
                   <ListItemText primary="Integrations" />
               </ListItem>
           </Grid>
-          <Grid item xs>
+          <Grid item xs className={classes.fixedHeight}>
             <Switch>
               <Route path="/datasets">
                 <Datasets />
