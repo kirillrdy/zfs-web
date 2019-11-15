@@ -65,7 +65,6 @@ function Datasets() {
   const classes = useStyles();
   return (
     <div className={classes.list}>
-      <h1>Datasets</h1>
       {datasets.map((dataset: Dataset) => (
         <ListItem key={dataset.Name} button onClick={e => clicked(dataset)}>
           <ListItemText primary={dataset.Name} />
@@ -117,24 +116,26 @@ function Navbar() {
 
 // TODO error handling
 // TODO spinner
-//TODO prettier
+// TODO prettier
 function App() {
   return (
-    <HBox>
-      <Router>
+    <Router>
+      <HBox>
         <Navbar />
         <Main>
           <Switch>
             <Route path="/datasets">
+              <h1>Datasets</h1>
               <Datasets />
             </Route>
             <Route path="/">
+              <h1>Datasets</h1>
               <Datasets />
             </Route>
           </Switch>
         </Main>
-      </Router>
-    </HBox>
+      </HBox>
+    </Router>
   );
 }
 
