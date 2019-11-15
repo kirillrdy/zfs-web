@@ -8,7 +8,6 @@ import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import PeopleIcon from "@material-ui/icons/People";
 import BarChartIcon from "@material-ui/icons/BarChart";
 import LayersIcon from "@material-ui/icons/Layers";
-import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import styled from "styled-components";
 
@@ -21,6 +20,12 @@ const HBox = styled.div`
 const VBox = styled.div`
   display: flex;
   flex-direction: column;
+`;
+const Main = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  height: 100vh;
 `;
 
 const useStyles = makeStyles({
@@ -114,12 +119,11 @@ function Navbar() {
 // TODO spinner
 //TODO prettier
 function App() {
-  const classes = useStyles();
   return (
     <HBox>
       <Router>
         <Navbar />
-        <Grid item xs className={classes.fixedHeight}>
+        <Main>
           <Switch>
             <Route path="/datasets">
               <Datasets />
@@ -128,7 +132,7 @@ function App() {
               <Datasets />
             </Route>
           </Switch>
-        </Grid>
+        </Main>
       </Router>
     </HBox>
   );
