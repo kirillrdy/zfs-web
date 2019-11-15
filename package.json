@@ -10,10 +10,12 @@
     "@types/react": "*",
     "@types/react-dom": "*",
     "@types/react-router-dom": "^5.1.2",
+    "@types/styled-components": "^4.4.0",
     "react": "*",
     "react-dom": "*",
     "react-router-dom": "^5.1.2",
     "react-scripts": "*",
+    "styled-components": "^4.4.1",
     "typescript": "*"
   },
   "scripts": {
