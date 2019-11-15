@@ -2,3 +2,7 @@ Requires zfs allow:
 
 
 zfs allow kirillvr create,destroy,mount,snapshot zroot/usr/home
+
+
+TODO cleanup readme
+prettier wtf ale
