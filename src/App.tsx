@@ -10,6 +10,8 @@ import BarChartIcon from '@material-ui/icons/BarChart';
 import LayersIcon from '@material-ui/icons/Layers';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
+import styled from 'styled-components';
+
 
 import {
   BrowserRouter as Router,
@@ -17,6 +19,16 @@ import {
   Route,
   Link
 } from "react-router-dom";
+
+
+const HBox = styled.div`
+  display: flex;
+  flex-direction: row;
+`
+const VBox = styled.div`
+  display: flex;
+  flex-direction: column;
+`
 
 const useStyles = makeStyles({
   fixedHeight: {
@@ -71,17 +83,9 @@ return (
 
 }
 
-
-// TODO error handling
-// TODO spinner
-//TODO prettier
-function App() {
-    const classes = useStyles()
-    return (
-      <Grid container spacing={10} className={classes.fixedHeight}>
-        <Router>
-          <Grid item>
-            <Link to="/datasets">
+function Navbar() {
+  return  (<VBox>
+    <Link to="/datasets">
               <ListItem button>
                   <ListItemIcon>
                       <DashboardIcon />
@@ -112,20 +116,34 @@ function App() {
                       <LayersIcon />
                   </ListItemIcon>
                   <ListItemText primary="Integrations" />
-              </ListItem>
-          </Grid>
+                    </ListItem>
+    </VBox>
+  )
+ 
+}
+
+
+// TODO error handling
+// TODO spinner
+//TODO prettier
+function App() {
+    const classes = useStyles()
+    return (
+      <HBox>
+        <Router>
+          <Navbar/>
           <Grid item xs className={classes.fixedHeight}>
             <Switch>
               <Route path="/datasets">
                 <Datasets />
              </Route>
-              <Route path="/">
+             <Route path="/">
                <Datasets />
               </Route>
             </Switch>
           </Grid>
         </Router>
-      </Grid>
+      </HBox>
     );
 }
 
