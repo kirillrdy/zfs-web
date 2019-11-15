@@ -78,6 +78,12 @@ function Datasets() {
 function Navbar() {
   return (
     <VBox>
+      <ListItem button>
+        <ListItemIcon>
+          <LayersIcon />
+        </ListItemIcon>
+        <ListItemText primary="Pools" />
+      </ListItem>
       <Link to="/datasets">
         <ListItem button>
           <ListItemIcon>
@@ -104,12 +110,7 @@ function Navbar() {
         </ListItemIcon>
         <ListItemText primary="Reports" />
       </ListItem>
-      <ListItem button>
-        <ListItemIcon>
-          <LayersIcon />
-        </ListItemIcon>
-        <ListItemText primary="Integrations" />
-      </ListItem>
+
     </VBox>
   );
 }
