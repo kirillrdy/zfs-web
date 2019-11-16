@@ -11,7 +11,7 @@ import LayersIcon from "@material-ui/icons/Layers";
 import { makeStyles } from "@material-ui/core/styles";
 import styled from "styled-components";
 
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link, useParams } from "react-router-dom";
 
 const HBox = styled.div`
   display: flex;
@@ -42,8 +42,6 @@ interface Dataset {
   Name: string;
 }
 
-function clicked(dataset: Dataset) {}
-
 function servedHost() {
   return window.location.protocol + "//" + window.location.hostname;
 }
@@ -66,8 +64,11 @@ function Datasets() {
   return (
     <div className={classes.list}>
       {datasets.map((dataset: Dataset) => (
-        <ListItem key={dataset.Name} button onClick={e => clicked(dataset)}>
-          <ListItemText primary={dataset.Name} />
+        <ListItem key={dataset.Name} button >
+          <Link  to={"/datasets/"+ dataset.Name }>
+            <ListItemText primary={dataset.Name} />
+          </Link>
+
           <Button> Foo</Button>
         </ListItem>
       ))}
@@ -115,6 +116,11 @@ function Navbar() {
   );
 }
 
+function Dataset() {
+  let { dataset } = useParams();
+  return (<h1>{dataset}</h1>)
+}
+
 // TODO error handling
 // TODO spinner
 // TODO prettier
@@ -125,6 +131,9 @@ function App() {
         <Navbar />
         <Main>
           <Switch>
+            <Route path="/datasets/:dataset+">
+              <Dataset />
+            </Route>
             <Route path="/datasets">
               <h1>Datasets</h1>
               <Datasets />
