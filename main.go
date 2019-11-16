@@ -5,10 +5,6 @@ import (
 	"fmt"
 	"github.com/dustin/go-humanize"
 	"github.com/kirillrdy/vidos/router"
-	vidos_web "github.com/kirillrdy/vidos/web"
-	"github.com/kirillrdy/web"
-	"github.com/kirillrdy/web/css"
-	"github.com/kirillrdy/web/html"
 	"github.com/mistifyio/go-zfs"
 	"log"
 	"net/http"
@@ -23,15 +19,7 @@ func crash(err error) {
 	}
 }
 
-var application vidos_web.Application = vidos_web.Application{Name: "ZFS", Menu: []vidos_web.Page{{Path: datasetsPath, Title: "Datasets"}}}
-
-const datasetsPath web.Path = "/datasets"
-const datasetsJSONPath web.Path = "/datasets.json"
-
-func list(response http.ResponseWriter, request *http.Request) {
-	hello := html.H1().Text("Hello World !")
-	application.NewPage("Datasets", "/datasets").ToHTML(hello).WriteTo(response)
-}
+const datasetsJSONPath = "/datasets.json"
 
 func listJSON(response http.ResponseWriter, request *http.Request) {
 	//TODO obviously not *
@@ -82,9 +70,6 @@ func createSnapshot(dataset *zfs.Dataset) {
 }
 
 func main() {
-
-	router.AddHandler(css.ResetCSSPath, css.ServeResetCSS)
-	router.AddHandler(datasetsPath, list)
 	router.AddHandler(datasetsJSONPath, listJSON)
 	addr := ":3000"
 
