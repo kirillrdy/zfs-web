@@ -46,11 +46,12 @@ func main() {
 	router.AddHandler(datasetsJSONPath, listJSON)
 	addr := ":3000"
 
-	npm := exec.Command("npm", "start")
+	npm := exec.Command("yarn", "start")
 	npm.Stdout = os.Stdout
 	npm.Stderr = os.Stderr
 
-	npm.Start()
+	err := npm.Start()
+	crash(err)
 
 	log.Printf("Listening on %v\n", addr)
 	http.ListenAndServe(addr, nil)
