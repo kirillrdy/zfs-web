@@ -9,13 +9,13 @@
     "@types/node": "*",
     "@types/react": "*",
     "@types/react-dom": "*",
-    "@types/react-router-dom": "^5.1.2",
-    "@types/styled-components": "^4.4.0",
+    "@types/react-router-dom": "*",
+    "@types/styled-components": "*",
     "react": "*",
     "react-dom": "*",
-    "react-router-dom": "^5.1.2",
+    "react-router-dom": "*",
     "react-scripts": "*",
-    "styled-components": "^4.4.1",
+    "styled-components": "*",
     "typescript": "*"
   },
   "scripts": {
