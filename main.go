@@ -49,6 +49,7 @@ func main() {
 	npm := exec.Command("yarn", "start")
 	npm.Stdout = os.Stdout
 	npm.Stderr = os.Stderr
+	npm.Stdin = os.Stdin
 
 	err := npm.Start()
 	crash(err)
